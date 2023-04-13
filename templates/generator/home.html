@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{% static '../../static/generator/styles.css' %}"
+    />
+    <title>PassWord Generator</title>
+  </head>
+  <body>
+    <header>
+      <div id="header">
+        <h1>Password Generator</h1>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2>Password Generator</h2>
+      <form action="/password" method="get">
+        {% csrf_token %}
+        <p>Generate a secure password using the options below:</p>
+        <label for="length">Length:</label>
+        <input
+          type="number"
+          id="length"
+          name="length"
+          min="8"
+          max="20"
+          value="12"
+        />
+        <br />
+        <input type="checkbox" id="uppercase" name="uppercase" checked />
+        <label for="uppercase">Include Uppercase Letters</label>
+        <br />
+        <input type="checkbox" id="lowercase" name="lowercase" checked />
+        <label for="lowercase">Include Lowercase Letters</label>
+        <br />
+        <input type="checkbox" id="numbers" name="numbers" checked />
+        <label for="numbers">Include Numbers</label>
+        <br />
+        <input type="checkbox" id="symbols" name="punctuation" checked />
+        <label for="symbols">Include Symbols</label>
+        <br />
+        <button id="generate">Generate Password</button>
+        <br />
+        <span>
+            <input type="text" id="password" value="{{password}}" name="password" readonly />
+            <button onclick="copyToClipBoard()">Copy Text</button>
+        </span>
+      </form>
+    </div>
+
+    <script src="{% static '../../static/generator/js/app.js'%}"></script>
+  </body>
+</html>
